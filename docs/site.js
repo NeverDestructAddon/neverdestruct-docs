@@ -43,7 +43,8 @@
           if (/^on/i.test(attr.name) || ['srcdoc','id','name'].includes(attr.name)) el.removeAttribute(attr.name);
           else if (['href','src','poster','xlink:href'].includes(attr.name) && /^\s*(?:javascript|data|vbscript):/i.test(attr.value)) el.removeAttribute(attr.name);
         }
-        if (el.matches('img')) { const url = mediaUrl(el.getAttribute('src')); if (url) el.src = url; }
+        if (el.matches('img,video,source')) { const url = mediaUrl(el.getAttribute('src')); if (url) el.src = url; }
+        if (el.matches('video[poster]')) { const url = mediaUrl(el.getAttribute('poster')); if (url) el.poster = url; }
         if (el.matches('a[target="_blank"]')) el.rel = 'noopener noreferrer';
       }
       return template.content;
