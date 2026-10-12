@@ -1,7 +1,7 @@
 {
   "title": "NeverDestruct",
   "subtitle": "KitTools · Documentation",
-  "layout": "continuous",
+  "layout": "chapters",
   "appearance": {
     "width": 1100,
     "background": "#353841",
@@ -11,11 +11,11 @@
   },
   "chapters": [
     {
-      "title": "Getting started",
+      "title": "Introduction",
       "blocks": [
         {
           "type": "text",
-          "body": "\n<p>Write your introduction here using the visual editor in Pages CMS.</p>\n<p>&nbsp;</p>\n<h2>Requirements</h2>\n<p dir=\"ltr\">The addon was tested on blender 5.2, it might work on earlier versions but I cannot guarantee that there isn’t any bugs on those versions.</p>\n<h2>Installation/Update</h2>\n<p dir=\"ltr\">To install or update, find top left the Edit menu, then select “Preferences…”</p>\n<p dir=\"ltr\"><img src=\"assets/images/blobid0-10fa6c7ce6.png\" width=\"401\" height=\"366\"></p>\n<p dir=\"ltr\">Then go in “Get Extensions” and find the down arrow top right, then select ”Install from Disk…“</p>\n<p dir=\"ltr\"><img src=\"assets/images/blobid1-0106fa6258.png\" width=\"1016\" height=\"438\"></p>\n<p dir=\"ltr\">Then locate and select the downloaded NeverDestruct Zip file, and press “Install from Disk”</p>\n<p dir=\"ltr\"><img src=\"assets/images/Screenshot-2026-10-12-220636-6c6462686e.png\" width=\"1016\" height=\"348\"></p>\n<p dir=\"ltr\">&nbsp;</p>\n<p dir=\"ltr\">&nbsp;</p>\n"
+          "body": "<h2>Requirements</h2>\n<p dir=\"ltr\">Blender 5.2. Compatibility is not guaranteed on earlier versions.</p>\n<h2>Installation/Update</h2>\n<p dir=\"ltr\">To install or update, find top left the Edit menu, then select “Preferences…”</p>\n<p dir=\"ltr\"><img src=\"assets/images/blobid0-10fa6c7ce6.png\" width=\"401\" height=\"366\"></p>\n<p dir=\"ltr\">Then go in “Get Extensions” and find the down arrow top right, then select ”Install from Disk…“</p>\n<p dir=\"ltr\"><img src=\"assets/images/blobid1-0106fa6258.png\" width=\"1016\" height=\"438\"></p>\n<p dir=\"ltr\">Then locate and select the downloaded NeverDestruct Zip file, and press “Install from Disk”</p>\n<p dir=\"ltr\"><img src=\"assets/images/Screenshot-2026-10-12-220636-6c6462686e.png\" width=\"1016\" height=\"348\"></p>\n<p dir=\"ltr\">&nbsp;</p>\n<p dir=\"ltr\">&nbsp;</p>\n"
         }
       ]
     },
