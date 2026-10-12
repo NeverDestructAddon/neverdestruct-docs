@@ -33,7 +33,7 @@
       "blocks": [
         {
           "type": "text",
-          "body": "\n<h2 dir=\"ltr\">Choosing and editing a layer</h2>\n<p dir=\"ltr\">&nbsp;</p>\n<p dir=\"ltr\">Editing with Edit Poly is fully seamless, you simply add the modifier and start working on your model, you enter editing by pressing tab, or from the object mode selection, just like your usual way. On top of that, you do not need to use the addon tools to take full advantage of Edit Poly, everything that’s native is fully supported out of the box, and if an unknown operator is detected, it should prompt you to allow it or not once you exit edit mode (this can then be managed in the addon’s preferences). When you add an edit poly modifier, it’s automatically selected as active as well.</p>\n<p dir=\"ltr\">&nbsp;</p>\n<p dir=\"ltr\">The left button defines which layer is active for editing.</p>\n<p dir=\"ltr\">&nbsp;</p>\n"
+          "body": "\n<h2 dir=\"ltr\">Adding and editing a layer</h2>\n<figure><video style=\"width: 1090px; height: 609px;\" src=\"assets/videos/2026-10-12-23-30-49-1716557702.mp4\" preload=\"metadata\" playsinline=\"playsinline\" controls=\"controls\" width=\"1090\" height=\"609\"></video>\n<figcaption>Editing with Edit Poly is fully seamless, you simply add the modifier and start working on your model, you enter editing by pressing tab, or from the object mode selection, just like your usual way. The left button of the edit poly modifier defines which layer is active for editing.</figcaption>\n</figure>\n<p dir=\"ltr\">&nbsp;</p>\n"
         }
       ]
     },
