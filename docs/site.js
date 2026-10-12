@@ -41,7 +41,10 @@
       for (const el of template.content.querySelectorAll('*')) {
         for (const attr of [...el.attributes]) {
           if (/^on/i.test(attr.name) || ['srcdoc','id','name'].includes(attr.name)) el.removeAttribute(attr.name);
-          else if (['href','src','poster','xlink:href'].includes(attr.name) && /^\s*(?:javascript|data|vbscript):/i.test(attr.value)) el.removeAttribute(attr.name);
+          else if (['href','src','poster','xlink:href'].includes(attr.name) && /^\s*(?:javascript|data|vbscript):/i.test(attr.value)) {
+            const rasterImage = el.matches('img') && attr.name === 'src' && /^data:image\/(?:png|jpe?g|gif|webp);base64,[A-Za-z0-9+/]+={0,2}$/i.test(attr.value);
+            if (!rasterImage) el.removeAttribute(attr.name);
+          }
         }
         if (el.matches('img,video,source')) { const url = mediaUrl(el.getAttribute('src')); if (url) el.src = url; }
         if (el.matches('video[poster]')) { const url = mediaUrl(el.getAttribute('poster')); if (url) el.poster = url; }
