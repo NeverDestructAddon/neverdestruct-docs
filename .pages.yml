@@ -1,0 +1,208 @@
+{
+  "media": [
+    {
+      "name": "images",
+      "label": "Pictures",
+      "input": "docs/assets/images",
+      "output": "assets/images",
+      "categories": [
+        "image"
+      ],
+      "rename": "safe"
+    },
+    {
+      "name": "videos",
+      "label": "Videos",
+      "input": "docs/assets/videos",
+      "output": "assets/videos",
+      "extensions": [
+        "mp4",
+        "webm"
+      ],
+      "rename": "safe"
+    }
+  ],
+  "content": [
+    {
+      "name": "documentation",
+      "label": "Documentation",
+      "type": "file",
+      "path": "docs/content.json",
+      "format": "json",
+      "fields": [
+        {
+          "name": "title",
+          "label": "Documentation title",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "subtitle",
+          "label": "Subtitle / author",
+          "type": "string"
+        },
+        {
+          "name": "layout",
+          "label": "Reading layout",
+          "type": "select",
+          "options": {
+            "values": [
+              {
+                "name": "continuous",
+                "label": "One continuous document"
+              },
+              {
+                "name": "chapters",
+                "label": "Show one chapter at a time"
+              }
+            ]
+          }
+        },
+        {
+          "name": "appearance",
+          "label": "Appearance",
+          "type": "object",
+          "fields": [
+            {
+              "name": "width",
+              "label": "Content width (pixels)",
+              "type": "number",
+              "options": {
+                "min": 500,
+                "max": 2200
+              }
+            },
+            {
+              "name": "background",
+              "label": "Page background colour (e.g. #ffffff)",
+              "type": "string"
+            },
+            {
+              "name": "text",
+              "label": "Text colour (e.g. #333333)",
+              "type": "string"
+            },
+            {
+              "name": "sidebar",
+              "label": "Left outline background colour",
+              "type": "string"
+            },
+            {
+              "name": "accent",
+              "label": "Accent colour",
+              "type": "string"
+            }
+          ]
+        },
+        {
+          "name": "chapters",
+          "label": "Chapters (arrange in the order you want)",
+          "type": "object",
+          "list": {
+            "collapsible": {
+              "collapsed": true,
+              "summary": "{title}"
+            }
+          },
+          "fields": [
+            {
+              "name": "title",
+              "label": "Chapter title",
+              "type": "string",
+              "required": true
+            },
+            {
+              "name": "blocks",
+              "label": "Content (text, pictures and videos in any order)",
+              "type": "block",
+              "list": true,
+              "options": {
+                "blockKey": "type",
+                "blocks": [
+                  {
+                    "name": "text",
+                    "label": "Formatted text",
+                    "fields": [
+                      {
+                        "name": "body",
+                        "label": "Text",
+                        "type": "rich-text",
+                        "options": {
+                          "format": "html",
+                          "media": "images",
+                          "switcher": false
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "name": "image",
+                    "label": "Picture (click to enlarge)",
+                    "fields": [
+                      {
+                        "name": "source",
+                        "label": "Upload / choose picture",
+                        "type": "image",
+                        "required": true,
+                        "options": {
+                          "media": "images"
+                        }
+                      },
+                      {
+                        "name": "caption",
+                        "label": "Caption / image description",
+                        "type": "string"
+                      },
+                      {
+                        "name": "width",
+                        "label": "Display width in pixels (optional)",
+                        "type": "number",
+                        "options": {
+                          "min": 100,
+                          "max": 2200
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "name": "video",
+                    "label": "Playable video",
+                    "fields": [
+                      {
+                        "name": "source",
+                        "label": "Upload / choose MP4 or WebM video",
+                        "type": "file",
+                        "required": true,
+                        "options": {
+                          "media": "videos",
+                          "extensions": [
+                            "mp4",
+                            "webm"
+                          ]
+                        }
+                      },
+                      {
+                        "name": "caption",
+                        "label": "Caption",
+                        "type": "string"
+                      },
+                      {
+                        "name": "width",
+                        "label": "Player width in pixels (optional)",
+                        "type": "number",
+                        "options": {
+                          "min": 100,
+                          "max": 2200
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
