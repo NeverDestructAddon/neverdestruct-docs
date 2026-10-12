@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NeverDestruct Documentation</title>
+  <link rel="stylesheet" href="site.css">
+  <script src="site.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#document">Skip to documentation</a>
+  <button id="menu-toggle" type="button" aria-controls="outline" aria-expanded="false">Chapters</button>
+  <aside id="outline">
+    <a class="brand" href="#top">NeverDestruct</a>
+    <label class="search-label" for="search">Find a chapter</label>
+    <input id="search" type="search" placeholder="Search documentation">
+    <nav id="chapters" aria-label="Chapters"></nav>
+  </aside>
+  <main id="document" tabindex="-1">
+    <header id="top"><h1 id="title">NeverDestruct</h1><p id="subtitle"></p></header>
+    <div id="content" aria-busy="true">Loading documentation…</div>
+    <nav id="chapter-pager" aria-label="Previous and next chapters"></nav>
+  </main>
+  <dialog id="image-zoom" aria-label="Enlarged picture">
+    <button type="button" id="close-image" aria-label="Close enlarged picture">×</button>
+    <img id="full-image" alt="">
+  </dialog>
+</body>
+</html>

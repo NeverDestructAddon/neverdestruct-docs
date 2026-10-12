@@ -1,0 +1,98 @@
+{
+  "title": "NeverDestruct",
+  "subtitle": "KitTools · Documentation",
+  "layout": "continuous",
+  "appearance": {
+    "width": 1100,
+    "background": "#ffffff",
+    "text": "#333333",
+    "sidebar": "#f5f6f8",
+    "accent": "#245b80"
+  },
+  "chapters": [
+    {
+      "title": "Getting started",
+      "blocks": [
+        {
+          "type": "text",
+          "body": "<p>Write your introduction here using the visual editor in Pages CMS.</p><h2>Installation</h2><p>Add your installation instructions here.</p>"
+        }
+      ]
+    },
+    {
+      "title": "Edit Poly",
+      "blocks": [
+        {
+          "type": "text",
+          "body": "<p>Write your Edit Poly chapter here.</p><h2>Choosing the active layer</h2><p>Add your explanation here.</p>"
+        }
+      ]
+    },
+    {
+      "title": "Edit Mesh",
+      "blocks": [
+        {
+          "type": "text",
+          "body": "<p>Write your Edit Mesh chapter here.</p>"
+        }
+      ]
+    },
+    {
+      "title": "Operations History",
+      "blocks": [
+        {
+          "type": "text",
+          "body": "<p>Write your Operations History chapter here.</p>"
+        }
+      ]
+    },
+    {
+      "title": "Editing tools",
+      "blocks": [
+        {
+          "type": "text",
+          "body": "<p>Write your editing tools chapter here.</p>"
+        }
+      ]
+    },
+    {
+      "title": "Modifiers and gizmos",
+      "blocks": [
+        {
+          "type": "text",
+          "body": "<p>Write your modifiers and gizmos chapter here.</p>"
+        }
+      ]
+    },
+    {
+      "title": "Replay and warnings",
+      "blocks": [
+        {
+          "type": "text",
+          "body": "<p>Write your replay and warnings chapter here.</p>"
+        }
+      ]
+    },
+    {
+      "title": "Media example",
+      "blocks": [
+        {
+          "type": "text",
+          "body": "<p>This chapter shows an image and a playable video. Replace them with your own media, or remove this example chapter in the editor.</p>"
+        },
+        {
+          "type": "image",
+          "source": "assets/images/example-image.png",
+          "caption": "Click the image to enlarge it.",
+          "width": 420
+        },
+        {
+          "type": "video",
+          "source": "assets/videos/example-video.mp4",
+          "caption": "Placeholder clip: use the player controls.",
+          "width": 640
+        }
+      ]
+    }
+  ]
+}
