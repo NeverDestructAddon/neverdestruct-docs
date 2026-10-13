@@ -20,6 +20,8 @@ button { cursor: pointer; }
 #search { width: 100%; padding: 8px 10px; border: 1px solid color-mix(in srgb, var(--text), transparent 80%); border-radius: 4px; color: var(--text); background: var(--page-bg); margin-bottom: 18px; }
 #chapters a { display: block; padding: 7px 0; text-decoration: none; color: var(--text); overflow-wrap: anywhere; }
 #chapters a:hover, #chapters a.active { color: var(--accent); text-decoration: underline; }
+#chapters a.current-chapter { color: var(--accent); }
+#chapters a.active { background: color-mix(in srgb, var(--accent), transparent 91%); border-radius: 4px; font-weight: 600; }
 #chapters a.chapter { font-weight: 600; margin-top: 3px; }
 #chapters a.section { padding-left: 14px; font-size: 14px; }
 #chapters a.subsection { padding-left: 26px; }
@@ -44,7 +46,8 @@ figcaption { font-size: 14px; opacity: .8; margin-top: 8px; }
 .rich-text details { margin: 16px 0; padding: 12px; border: 1px solid color-mix(in srgb, var(--text), transparent 80%); border-radius: 5px; }
 .rich-text summary { cursor: pointer; font-weight: bold; }
 #chapter-pager { display: flex; justify-content: space-between; gap: 24px; }
-#chapter-pager a { padding: 10px 0; }
+#chapter-pager a { padding: 12px 14px; font-size: 18px; border: 1px solid color-mix(in srgb, var(--accent), transparent 70%); border-radius: 5px; text-decoration: none; }
+#chapter-pager a:hover { background: color-mix(in srgb, var(--accent), transparent 94%); }
 [hidden] { display: none !important; }
 #image-zoom { width: fit-content; max-width: 96vw; max-height: 96vh; padding: 0; border: 0; background: transparent; overflow: visible; }
 #image-zoom::backdrop { background: rgba(0, 0, 0, .8); }

@@ -95,7 +95,36 @@
     const outline = document.querySelector('#outline');
     menu.addEventListener('click', () => { const open = outline.classList.toggle('open'); menu.setAttribute('aria-expanded', String(open)); });
     const pager = document.querySelector('#chapter-pager');
-    let currentIndex = 0;
+    let currentIndex = 0, activeEntry = null, scrollFrame = 0, navigating = false;
+    let trackingEntries = [];
+    function highlight(entry) {
+      if (!entry || entry === activeEntry) return;
+      activeEntry = entry;
+      for (const item of entries) {
+        const active = item === entry;
+        item.a.classList.toggle('active', active);
+        item.a.classList.toggle('current-chapter', item.a.classList.contains('chapter') && item.chapterIndex === entry.chapterIndex);
+        if (active) item.a.setAttribute('aria-current', 'location');
+        else item.a.removeAttribute('aria-current');
+      }
+    }
+    function trackSection() {
+      if (!trackingEntries.length) return;
+      const line = Math.max(80, parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0);
+      let low = 0, high = trackingEntries.length - 1, index = 0;
+      // Headings stay in document order; only a few position reads are needed per frame.
+      while (low <= high) {
+        const middle = (low + high) >> 1;
+        if (trackingEntries[middle].element.getBoundingClientRect().top <= line) { index = middle; low = middle + 1; }
+        else high = middle - 1;
+      }
+      if (scrollY > 0 && scrollY + innerHeight >= document.documentElement.scrollHeight - 2) index = trackingEntries.length - 1;
+      highlight(trackingEntries[index].entry);
+    }
+    function scheduleTracking() {
+      if (scrollFrame) return;
+      scrollFrame = requestAnimationFrame(() => { scrollFrame = 0; if (!navigating) trackSection(); });
+    }
     function navigate() {
       let id; try { id = decodeURIComponent(location.hash.slice(1)); } catch { id = ''; }
       const target = document.getElementById(id);
@@ -106,14 +135,29 @@
       pager.replaceChildren();
       if (separate) for (const [index, prefix] of [[currentIndex - 1, '← '], [currentIndex + 1, 'Next: ']]) {
         if (index < 0 || index >= sections.length) continue;
-        const a = document.createElement('a'); a.href = `#${sections[index].id}`; a.textContent = prefix + chapters[index].title; pager.append(a);
+        const a = document.createElement('a'); a.href = `#${sections[index].id}`; a.textContent = prefix + chapters[index].title; a.rel = index < currentIndex ? 'prev' : 'next'; pager.append(a);
       }
-      entries.forEach(e => { e.a.classList.toggle('active', e.id === id); if (e.id === id) e.a.setAttribute('aria-current', 'location'); else e.a.removeAttribute('aria-current'); });
+      trackingEntries = entries.filter(entry => !separate || entry.chapterIndex === currentIndex).map(entry => ({entry, element:document.getElementById(entry.id)}));
+      const selected = entries.find(entry => entry.id === id);
+      if (selected) highlight(selected); else trackSection();
       outline.classList.remove('open'); menu.setAttribute('aria-expanded', 'false');
-      if (target) requestAnimationFrame(() => target.scrollIntoView({block:'start', behavior:'instant'}));
+      if (target) {
+        navigating = true;
+        requestAnimationFrame(() => {
+          target.scrollIntoView({block:'start', behavior:'instant'});
+          requestAnimationFrame(() => { navigating = false; });
+        });
+      }
     }
-    nav.addEventListener('click', event => { if (event.target.closest('a')) setTimeout(navigate, 0); });
+    nav.addEventListener('click', event => {
+      const link = event.target.closest('a');
+      if (link && link.hash === location.hash) navigate();
+    });
     window.addEventListener('hashchange', navigate);
+    window.addEventListener('scroll', scheduleTracking, {passive:true});
+    window.addEventListener('resize', scheduleTracking);
+    content.addEventListener('load', scheduleTracking, true);
+    new ResizeObserver(scheduleTracking).observe(content);
     document.querySelector('#search').addEventListener('input', event => {
       const term = event.target.value.trim().toLowerCase();
       entries.forEach(e => { e.a.hidden = !e.searchText.toLowerCase().includes(term); });
