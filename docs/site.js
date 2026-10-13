@@ -110,7 +110,7 @@
     }
     function trackSection() {
       if (!trackingEntries.length) return;
-      const line = Math.max(80, parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0);
+      const line = innerHeight / 2;
       let low = 0, high = trackingEntries.length - 1, index = 0;
       // Headings stay in document order; only a few position reads are needed per frame.
       while (low <= high) {
@@ -118,7 +118,6 @@
         if (trackingEntries[middle].element.getBoundingClientRect().top <= line) { index = middle; low = middle + 1; }
         else high = middle - 1;
       }
-      if (scrollY > 0 && scrollY + innerHeight >= document.documentElement.scrollHeight - 2) index = trackingEntries.length - 1;
       highlight(trackingEntries[index].entry);
     }
     function scheduleTracking() {
