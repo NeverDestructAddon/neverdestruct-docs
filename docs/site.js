@@ -47,6 +47,8 @@
           }
         }
         if (el.matches('img,video,source')) { const url = mediaUrl(el.getAttribute('src')); if (url) el.src = url; }
+        // Wait for Play instead of fetching metadata for every video, including hidden chapters.
+        if (el.matches('video')) el.preload = 'none';
         if (el.matches('video[poster]')) { const url = mediaUrl(el.getAttribute('poster')); if (url) el.poster = url; }
         if (el.matches('a[target="_blank"]')) el.rel = 'noopener noreferrer';
       }
@@ -82,7 +84,7 @@
           const size = Number(block.width); if (size >= 100 && size <= 2200) media.width = size;
           else media.width = block.type === 'image' ? 520 : 720;
           if (block.type === 'image') { media.alt = block.caption || ''; media.loading = 'lazy'; }
-          else { media.controls = true; media.preload = 'metadata'; media.playsInline = true; }
+          else { media.controls = true; media.preload = 'none'; media.playsInline = true; }
           figure.append(media);
           if (block.caption) { const caption = document.createElement('figcaption'); caption.textContent = block.caption; figure.append(caption); }
           section.append(figure);
@@ -91,6 +93,28 @@
       entries[linkIndex].searchText = section.textContent;
       content.append(section); return section;
     });
+    const resumePositions = new WeakMap();
+    let activeVideo = null;
+    function suspendVideo(video) {
+      resumePositions.set(video, video.ended ? 0 : video.currentTime);
+      video.pause();
+      // Abort the previous download as well as playback. Native controls can restart it.
+      video.load();
+    }
+    function restorePosition(video) {
+      if (video !== activeVideo || video.paused || !video.readyState || !resumePositions.has(video)) return;
+      const position = resumePositions.get(video);
+      resumePositions.delete(video);
+      if (position > 0 && position < video.duration) video.currentTime = position;
+    }
+    content.addEventListener('play', event => {
+      const video = event.target;
+      if (!(video instanceof HTMLVideoElement)) return;
+      if (activeVideo && activeVideo !== video) suspendVideo(activeVideo);
+      activeVideo = video;
+      restorePosition(video);
+    }, true);
+    content.addEventListener('loadedmetadata', event => restorePosition(event.target), true);
     const menu = document.querySelector('#menu-toggle');
     const outline = document.querySelector('#outline');
     menu.addEventListener('click', () => { const open = outline.classList.toggle('open'); menu.setAttribute('aria-expanded', String(open)); });
@@ -131,6 +155,7 @@
       if (currentIndex < 0) currentIndex = 0;
       const separate = data.layout === 'chapters';
       sections.forEach((s, i) => { s.hidden = separate && i !== currentIndex; });
+      if (activeVideo && activeVideo.closest('.doc-chapter').hidden) { suspendVideo(activeVideo); activeVideo = null; }
       pager.replaceChildren();
       if (separate) for (const [index, prefix] of [[currentIndex - 1, '← '], [currentIndex + 1, 'Next: ']]) {
         if (index < 0 || index >= sections.length) continue;
